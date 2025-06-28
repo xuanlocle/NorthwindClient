@@ -51,15 +51,20 @@ This mobile app requires the **MyNorthwind** backend server to be running. The s
 ---
 # Project Assets
 
-Here are the assets used in the project:
+Customer List             |  Details
+:-------------------------:|:-------------------------:
+![](assets/customer.png)  |  ![](assets/details.png)
 
- <img alt="customer.png" src="assets/customer.png" width="300"/>
- <img alt="details.png" src="assets/details.png" width="300"/>
- <img alt="new_order.png"  src="assets/new_order.png" width="300"/>
- <img alt="scan_barcode.png"  src="assets/scan_barcode.png" width="300"/>
+New Order             |  Scan Barcode
+:-------------------------:|:-------------------------:
+![](assets/new_order.png)  |  ![](assets/scan_barcode.png)
 
-[![Video](file:assets/notification_deepink.mov)]
-[![Video](file:assets/demo.mov)]
+
+https://github.com/user-attachments/assets/bccbab2f-679f-4906-a44f-bb2133656f0c
+
+https://github.com/user-attachments/assets/8d423a68-eeed-474d-9fa4-5c052805864e
+
+
 
 ---
 
