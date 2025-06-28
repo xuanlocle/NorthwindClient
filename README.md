@@ -15,6 +15,40 @@
 - 🔥 Firebase integration (WIP – Push Notifications)
 
 ---
+
+## 🔧 Backend Server Requirements
+
+This mobile app requires the **MyNorthwind** backend server to be running. The server must be configured to run on **port 5100** for the APK to work properly.
+
+### Backend Repository
+- **Repository**: [MyNorthwind](https://github.com/xuanlocle/MyNorthwind)
+- **Required Port**: `5100`
+- **API Base URL**: `http://localhost:5100/api`
+
+### Quick Setup
+1. Clone the backend repository:
+   ```bash
+   git clone https://github.com/xuanlocle/MyNorthwind.git
+   cd MyNorthwind
+   ```
+
+2. Run the server on port 5100:
+   ```bash
+   # Using Docker (recommended)
+   docker-compose up -d
+   
+   # Or using .NET CLI
+   dotnet run --urls "http://localhost:5100"
+   ```
+
+3. Verify the server is running:
+   ```bash
+   curl http://localhost:5100/api/customers
+   ```
+
+**⚠️ Important**: The mobile app is configured to connect to `localhost:5100`. If you change the server port, you'll need to update the app's configuration.
+
+---
 # Project Assets
 
 Here are the assets used in the project:
@@ -61,6 +95,8 @@ Here are the assets used in the project:
 
 ## 🔐 Configuration
 - Base API URL securely stored in IAppConfig and injected via DI
+- **Backend Server**: Must run on port 5100 (see Backend Server Requirements above)
+- **API Endpoint**: Configured to connect to `http://localhost:5100/api`
 - Consider using SecureStorage for auth/token if added in future
 
 ## ⚠️ Known TODOs
