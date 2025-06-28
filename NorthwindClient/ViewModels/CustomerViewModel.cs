@@ -1,13 +1,13 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Net;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using NorthwindClient.Common;
 using NorthwindClient.Infrastructure;
 using NorthwindClient.Models;
 using NorthwindClient.Services;
+using Plugin.Firebase.CloudMessaging;
 
 namespace NorthwindClient.ViewModels;
 
@@ -33,7 +33,6 @@ public partial class CustomerViewModel : ObservableObject
         _service = service;
         LoadCustomerCommand.Execute(null);
     }
-
 
     [RelayCommand]
     private async Task LoadCustomerAsync()
@@ -102,4 +101,52 @@ public partial class CustomerViewModel : ObservableObject
             Routes.CustomerDetailPage,
             new Dictionary<string, object> { { "customerId", customerId } });
     }
+
+
+    public async Task GenerateAndSaveFcmToken()
+    {
+        var status = await CheckAndRequestNotificationPermissionAsync();
+        if (status == PermissionStatus.Granted)
+        {
+            try
+            {
+                var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+                // For production: send token to your backend
+                await SendTokenToBackend(token);
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error", $"Failed to get FCM token: {ex.Message}", "OK");
+            }
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Notice", "Notification permission was not granted.", "OK");
+        }
+    }
+
+    private async Task<PermissionStatus> CheckAndRequestNotificationPermissionAsync()
+    {
+        await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+        var status = await Permissions.CheckStatusAsync<Permissions.PostNotifications>();
+        if (status != PermissionStatus.Granted)
+        {
+            status = await Permissions.RequestAsync<Permissions.PostNotifications>();
+        }
+
+        return status;
+    }
+
+    private async Task SendTokenToBackend(string token)
+    {
+        var localFcmToken = Preferences.Get(FCM_TOKEN_PREFERENCE, null);
+        if (string.IsNullOrEmpty(localFcmToken))
+        {
+            //only send to backend in the first time.
+            await _service.RegisterDeviceTokenAsync(token);
+            Preferences.Set(FCM_TOKEN_PREFERENCE, token);
+        }
+    }
+
+    private const string FCM_TOKEN_PREFERENCE = "fcmToken";
 }

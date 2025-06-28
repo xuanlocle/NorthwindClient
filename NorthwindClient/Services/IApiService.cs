@@ -5,6 +5,8 @@ namespace NorthwindClient.Services;
 
 public interface IApiService
 {
+    Task<bool> RegisterDeviceTokenAsync(string token);
+
     Task<List<CustomerModel>> GetCustomersAsync();
 
     Task<CustomerModel?> GetCustomerByIdAsync(string id);

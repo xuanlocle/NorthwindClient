@@ -4,11 +4,10 @@ namespace NorthwindClient.Views;
 
 public partial class CustomerPage : ContentPage
 {
-
     public CustomerPage(CustomerViewModel viewmodel)
     {
         InitializeComponent();
         BindingContext = viewmodel;
+        viewmodel.GenerateAndSaveFcmToken();
     }
-
 }

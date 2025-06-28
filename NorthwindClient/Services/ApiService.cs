@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
 using NorthwindClient.Models;
 
 namespace NorthwindClient.Services;
@@ -11,6 +12,26 @@ public class ApiService : IApiService
     public ApiService(HttpClient httpClient)
     {
         _httpClient = httpClient;
+    }
+
+    public async Task<bool> RegisterDeviceTokenAsync(string token)
+    {
+        var deviceTokenModel = new DeviceToken
+        {
+            Token = token,
+            RegisteredAt = DateTime.UtcNow
+        };
+
+        var response = await _httpClient.PostAsJsonAsync("device/register", deviceTokenModel);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Fetch customers
@@ -43,7 +64,7 @@ public class ApiService : IApiService
 
     public async Task<bool> DeleteCustomerAsync(string customerId)
     {
-        var response = await _httpClient.DeleteAsync($"customers/{customerId}"); 
+        var response = await _httpClient.DeleteAsync($"customers/{customerId}");
         return response.IsSuccessStatusCode;
     }
 }
