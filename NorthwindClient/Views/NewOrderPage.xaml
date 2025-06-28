@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             x:Class="NorthwindClient.Views.NewOrderPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear"
+                     Priority="0"
+                     Order="Primary"
+                     Command="{Binding ClearFormCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout Padding="10" Spacing="10">
+            <Label Text="New Order" FontSize="24" HorizontalOptions="Center" />
+
+            <!-- Order Date Picker -->
+            <Label Text="Order Date and Time" />
+            <Frame Margin="0,4">
+                <StackLayout Orientation="Horizontal">
+                    <!-- Date Picker -->
+                    <DatePicker x:Name="OrderDatePicker"
+                                Date="{Binding OrderDate}"
+                                MinimumDate="{x:Static sys:DateTime.Now}"
+                                Format="D"
+                                HorizontalOptions="StartAndExpand" />
+
+                    <!-- Time Picker -->
+                    <TimePicker x:Name="OrderTimePicker"
+                                Time="{Binding OrderTime}"
+                                Format="HH:mm"
+                                HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Required Date and Time -->
+            <Label Text="Required Date and Time" />
+            <Frame Margin="0,4">
+                <StackLayout Orientation="Horizontal">
+                    <DatePicker x:Name="RequiredDatePicker"
+                                Date="{Binding RequiredDate}"
+                                MinimumDate="{x:Static sys:DateTime.Now}"
+                                Format="D"
+                                HorizontalOptions="StartAndExpand" />
+
+                    <TimePicker x:Name="RequiredTimePicker"
+                                Time="{Binding RequiredTime}"
+                                Format="HH:mm"
+                                HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Shipped Date and Time -->
+            <Label Text="Shipped Date and Time" />
+            <Frame Margin="0,4">
+                <StackLayout Orientation="Horizontal">
+                    <DatePicker x:Name="ShippedDatePicker"
+                                Date="{Binding ShippedDate}"
+                                MinimumDate="{x:Static sys:DateTime.Now}"
+                                Format="D"
+                                HorizontalOptions="StartAndExpand" />
+
+                    <TimePicker x:Name="ShippedTimePicker"
+                                Time="{Binding ShippedTime}"
+                                Format="HH:mm"
+                                HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+
+            <Entry Placeholder="Employee ID"
+                   Text="{Binding Order.EmployeeId}"
+                   Keyboard="Numeric" />
+
+            <Grid ColumnDefinitions="*, Auto" Margin="0,5">
+                <Entry Placeholder="Ship Via"
+                       Text="{Binding Order.ShipVia}"
+                       Keyboard="Numeric"
+                       Grid.Column="0" />
+
+                <Button Text="&#xe3af;"
+                        FontFamily="MaterialIcons"
+                        Command="{Binding ScanCommand}"
+                        CommandParameter="shipvia"
+                        FontSize="20"
+                        BackgroundColor="Transparent"
+                        TextColor="Gray"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Padding="10,0" />
+            </Grid>
+
+            <!-- Freight Entry with icon and command -->
+            <Grid ColumnDefinitions="*, Auto" Margin="0,5">
+                <Entry Placeholder="Freight"
+                       Text="{Binding Freight}"
+                       Keyboard="Numeric"
+                       Grid.Column="0" />
+                <Button
+                    Text="&#xe3af;"
+                    FontFamily="MaterialIcons"
+                    Command="{Binding ScanCommand}"
+                    CommandParameter="freight"
+                    FontSize="20"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray"
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    Padding="10,0" />
+            </Grid>
+
+            <Entry Placeholder="Ship Name"
+                   Text="{Binding ShipName}" />
+
+            <Entry Placeholder="Ship Address"
+                   Text="{Binding ShipAddress}" />
+
+            <Entry Placeholder="Ship City"
+                   Text="{Binding ShipCity}" />
+
+            <Entry Placeholder="Ship Region"
+                   Text="{Binding ShipRegion}" />
+
+            <Entry Placeholder="Ship Postal Code"
+                   Text="{Binding ShipPostalCode}" />
+
+            <Entry Placeholder="Ship Country"
+                   Text="{Binding ShipCountry}" />
+
+            <Button Text="Submit Order"
+                    Command="{Binding SubmitOrderCommand}"
+                    Margin="0,10" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,50 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.DS_Store
+*.vs/
+
+# Xamarin / MAUI specific
+*.apk
+*.apks
+*.aab
+*.ipa
+*.app
+*.dSYM/
+*.xcarchive/
+*.xcuserstate
+*.xcuserdatad
+*.vscode/
+
+# macOS specific
+.idea/
+*.iml
+
+# VS for Mac
+.vscode/
+*.pidb
+*.userprefs
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+
+# Local config
+.env
+appsettings.local.json
+secrets.json
+
+#
+

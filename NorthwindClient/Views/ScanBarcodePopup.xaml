@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mopup:PopupPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+    xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
+    x:Class="NorthwindClient.Views.ScanBarcodePopup">
+    <Grid BackgroundColor="#80000000">
+
+        <VerticalStackLayout Padding="20" 
+                             VerticalOptions="Center"
+                             Spacing="10">
+            <zxing:CameraBarcodeReaderView
+                x:Name="cameraBarcodeReaderView"
+                IsDetecting="True"
+                BarcodesDetected="OnBarcodeDetected"
+                HeightRequest="300"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Button Text="Cancel"
+                    Clicked="Button_OnClicked"
+                    BackgroundColor="Gray"
+                    TextColor="White" />
+        </VerticalStackLayout>
+
+    </Grid>
+</mopup:PopupPage>
